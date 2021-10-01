@@ -13,7 +13,7 @@ message = "Working..."
 phone = '+573143277479'
 
 @bot.message_handler(commands=['tareas'])
-def greet(message):
+def tareas(message):
   bot.reply_to(message, "No hay tareas asignadas")
 
 @bot.message_handler(commands=['hola'])
@@ -26,11 +26,18 @@ def task_request(message):
     return False
   else:
     return True
-
+     
 @bot.message_handler(func=task_request)
 def send_task(message):
-  bot.send_message(message.chat.id, "Tu tarea ha sido anotada y se recordará")
+  bot.send_message(message.chat.id, "Tu tarea ha sido anotada y se recordará"+ message.text)
   pass
 
+
+def start(update, context):
+  bot.reply_to(message.chat.id,'¡Hola! Soy tu bot para recordar tareas :D espero poder ayudarte a recordar todas tus actividades y deberes pendientes. Asigna tareas a tu lista con la palabra "anotar" y seguido la tarea que quieres anotar, y usa el comando "/tareas" para ver tu lista de tareas')
+
+
+def echo(message):
+	bot.reply_to(message, message.text)
 
 bot.polling()
